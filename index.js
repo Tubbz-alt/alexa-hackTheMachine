@@ -1,19 +1,18 @@
 'use strict';
 
 const Alexa = require('ask-sdk-core');
-const {LaunchRequestHandler, CancelAndStopIntentHandler, SessionEndedRequestHandler, ErrorHandler}
-= require('./handlers/handlers')
+const { LaunchRequestHandler, CancelAndStopIntentHandler, SessionEndedRequestHandler, ErrorHandler } = require('./handlers/handlers')
 if ('undefined' === typeof process.env.DEBUG) {
-  Alexa.appId = '...';
+    Alexa.appId = '...';
 }
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
-  .addRequestHandlers(
-    LaunchRequestHandler,
-    CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
-  )
-  .addErrorHandlers(ErrorHandler)
-  .lambda();
+    .addRequestHandlers(
+        LaunchRequestHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler
+    )
+    .addErrorHandlers(ErrorHandler)
+    .lambda();
