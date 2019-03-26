@@ -21,6 +21,7 @@
     "ask-sdk-model": "^1.13.0"
   },
   "devDependencies": {
-    "aws-sdk": "^2.428.0"
+    "aws-sdk": "^2.428.0",
+    "eslint": "^5.15.3"
   }
 }
