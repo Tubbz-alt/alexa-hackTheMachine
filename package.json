@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/vishivish18/alexa-hackTheMachine/issues"
   },
-  "homepage": "https://github.com/vishivish18/alexa-hackTheMachine#readme"
+  "homepage": "https://github.com/vishivish18/alexa-hackTheMachine#readme",
+  "dependencies": {
+    "ask-sdk-core": "^2.5.1",
+    "ask-sdk-model": "^1.13.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.428.0"
+  }
 }

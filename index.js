@@ -1,47 +1,75 @@
 'use strict';
 
-var Alexa = require('alexa-sdk');
+const Alexa = require('ask-sdk-core');
 
 if ('undefined' === typeof process.env.DEBUG) {
-    Alexa.appId = '...';
-    var AWS = require('aws-sdk');
-    var dyn = new AWS.DynamoDB({endpoint: new AWS.Endpoint("http://localhost:8000")});
-    Alexa.dynamoDBClient = dyn;
-  }
+  Alexa.appId = '...';
+  var AWS = require('aws-sdk');
+  var dyn = new AWS.DynamoDB({ endpoint: new AWS.Endpoint("http://localhost:8000") });
+  Alexa.dynamoDBClient = dyn;
+}
 
-var handlers = {
+const LaunchRequestHandler = {
 
-  'LaunchRequest': function() {
- 
-    this.response.speak('Welcome To Hack The Machine Team 2')
-    this.emit(':responseReady');
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
-
-  // Stop
-  'AMAZON.StopIntent': function() {
-    this.response.speak('Bye, See You again');
-    this.emit(':responseReady');
+  handle(handlerInput) {
+    return handlerInput.responseBuilder.speak('Welcome To Hack The Machine Team 2')
+      .reprompt('Sorry, I can\'t understand the command. Please say again.')
+      .getResponse();
   },
-
-  // Cancel
-  'AMAZON.CancelIntent': function() {
-    this.response.speak('Bye, See you again');
-    this.emit(':responseReady');
-  },
-
-  // Save state
-  'SessionEndedRequest': function() {
-    console.log('session ended!');
-    this.emit(':saveState', true);
-  }
-
 };
 
+const CancelAndStopIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+  },
+  handle(handlerInput) {
+    const speechText = 'Goodbye!';
 
-exports.handler = function(event, context, callback){
-  var alexa = Alexa.handler(event, context, callback);
-  //alexa.dynamoDBTableName = 'TableName';
-  alexa.registerHandlers(handlers);
-  alexa.execute();
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard('Hello World', speechText)
+      .getResponse();
+  },
 };
+
+const SessionEndedRequestHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+  },
+  handle(handlerInput) {
+    console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
+
+    return handlerInput.responseBuilder.getResponse();
+  },
+};
+
+const ErrorHandler = {
+  canHandle() {
+    return true;
+  },
+  handle(handlerInput, error) {
+    console.log(`Error handled: ${error.message}`);
+
+    return handlerInput.responseBuilder
+      .speak('Sorry, I can\'t understand the command. Please say again.')
+      .reprompt('Sorry, I can\'t understand the command. Please say again.')
+      .getResponse();
+  },
+};
+
+const skillBuilder = Alexa.SkillBuilders.custom();
+
+exports.handler = skillBuilder
+  .addRequestHandlers(
+    LaunchRequestHandler,
+    CancelAndStopIntentHandler,
+    SessionEndedRequestHandler
+  )
+  .addErrorHandlers(ErrorHandler)
+  .lambda();
 
