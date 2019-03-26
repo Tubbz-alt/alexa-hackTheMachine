@@ -18,7 +18,8 @@
   "homepage": "https://github.com/vishivish18/alexa-hackTheMachine#readme",
   "dependencies": {
     "ask-sdk-core": "^2.5.1",
-    "ask-sdk-model": "^1.13.0"
+    "ask-sdk-model": "^1.13.0",
+    "mongoose": "^5.4.20"
   },
   "devDependencies": {
     "eslint": "^5.15.3"
