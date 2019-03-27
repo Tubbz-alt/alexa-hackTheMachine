@@ -32,9 +32,197 @@
                 {
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []
+                },
+                {
+                    "name": "BuyIntent",
+                    "slots" : [
+                        {
+                            "name": "product",
+                            "type": "LIST_OF_PRODUCTS",
+                            "samples": [
+                                "{product}",
+                                "planning to buy {product}"
+                              ]                      
+                        }
+                    ],
+                    "samples": [
+                        "planning to purchase {product}",
+                        "I want to purchase {product}",
+                        "Purchase {product} for me",
+                        "Puchase {product}",
+                        "{product}",
+                        "Purchase",
+                        "Puchase {product} of black color",
+                        "I'd like to Puchase {product}",
+                        "I'd like to Puchase black {product}"                                  
+                    ]
+                },
+                {
+                    "name": "ProductDetailIntent",
+                    "slots" : [
+                        {
+                            "name": "product",
+                            "type": "LIST_OF_PRODUCTS",
+                            "samples": [
+                                "{product}",
+                                "detail {product}"
+                              ]                      
+                        }
+                    ],
+                    "samples": [
+                        "Give me Detail for {product}",
+                        "Give Detail for {product}",
+                        "tell me Detail for {product}",
+                        "tell Detail for {product}",
+                        "what's the Detail for {product}",                       
+                        "Detail for {product}",
+                        "jeans detail",
+                        "detail",
+                        "size of {product}",
+                        "type of {product}",
+                        "features of {product}",
+                        "{product} features"
+                    ]
+                },
+                {
+                    "name": "ProductPriceIntent",
+                    "slots" : [
+                        {
+                            "name": "product",
+                            "type": "LIST_OF_PRODUCTS",
+                            "samples": [
+                                "{product}",
+                                "detail {product}"
+                              ]                      
+                        }
+                    ],
+                    "samples": [
+                        "price of black {product}",
+                        "price of {product}",
+                        "tell me price for {product}",
+                        "tell price for {product}",
+                        "what's the price for {product}",         
+                        "Let me know price of black {product}",
+                        "Let me know price of {product}",
+                        "Give me price of black {product}",
+                        "Give me price of {product}",
+                        "Give price of {product}",
+                        "Give price of black {product}"
+                    ]
+                },
+                {
+                    "name": "OrderDetailIntent",
+                    "samples": [                       
+                        "Give my order detail",
+                        "Give my order details",
+                        "what's my order detail", 
+                        "tell me order details",
+                        "Order details",
+                        "Detail my orders",
+                        "Give me order details",
+                        "Give me order detail",
+                        "I want to deatil of my order"
+                    ]
+                },
+                {
+                    "name": "ModifyOrderIntent",
+                    "samples": [                       
+                        "I want to change my order",
+                        "Change my order",
+                        "Change order",
+                        "Modify my order",
+                        "Modify order",
+                        "I want to modify my order"
+                    ]
+                },
+                {
+                    "name": "CancelOrderIntent",
+                    "samples": [
+                        "I want to cancel my order",
+                        "Cancel my order",
+                        "Cancel order",
+                        "I want order cancelllation"
+                    ]
                 }
             ],
-            "types": []
-        }
+            "types": [
+                {
+                "name": "LIST_OF_PRODUCTS",
+                "values" : [
+                    {
+                        "id": "JEANS",
+                        "name": {
+                            "value": "Purchase Jeans",
+                            "synonyms": [
+                              "Jean",
+                              "Jeans",
+                              "Trouser",
+                              "Trousers"
+                            ]
+                          }
+                    },
+                    {
+                        "id": "SHIRT",
+                        "name": {
+                            "value": "Purchase Shirt",
+                            "synonyms": [
+                              "Shirt",
+                              "T-Shirt"                            
+                            ]
+                          }
+                    }
+                ]
+                
+                }         
+            ]
+        }, 
+        "dialog": {
+            "intents": [
+                {
+                    "name": "BuyIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "product",
+                            "type": "LIST_OF_PRODUCTS",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.115883883481.606561500128"
+                            },
+                            "validations": [
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.124647280749.1544315380405.495607136685"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Slot.Validation.124647280749.1544315380405.495607136685",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Please tell me Jeans or Shirts."
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.115883883481.606561500128",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What do you want to purchase?"
+                    }
+                ]
+            }
+        ]
     }
 }
