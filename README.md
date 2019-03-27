@@ -17,3 +17,5 @@ https://aws.amazon.com/cli/
 
 ### AWS Code commit Repository
 lambda-pipeline-repo
+
+Todo: Pipeline implementaion
