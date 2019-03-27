@@ -1,7 +1,7 @@
 'use strict';
 
 const Alexa = require('ask-sdk-core');
-const { LaunchRequestHandler, CancelAndStopIntentHandler, SessionEndedRequestHandler, ErrorHandler } = require('./handlers/handlers')
+const { LaunchRequestHandler, CancelAndStopIntentHandler, SessionEndedRequestHandler, ErrorHandler } = require('./handlers')
 if ('undefined' === typeof process.env.DEBUG) {
     Alexa.appId = '...';
 }

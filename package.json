@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test-local": "alexa-skill-test --interaction-model ./InteractionModel/InteractionModel.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
