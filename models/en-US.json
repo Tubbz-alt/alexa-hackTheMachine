@@ -35,14 +35,14 @@
                 },
                 {
                     "name": "BuyIntent",
-                    "slots" : [
+                    "slots": [
                         {
                             "name": "product",
                             "type": "LIST_OF_PRODUCTS",
                             "samples": [
                                 "{product}",
                                 "planning to buy {product}"
-                              ]                      
+                            ]
                         }
                     ],
                     "samples": [
@@ -54,46 +54,54 @@
                         "Purchase",
                         "Puchase {product} of black color",
                         "I'd like to Puchase {product}",
-                        "I'd like to Puchase black {product}"                                  
+                        "I'd like to Puchase black {product}",
+                        "Planning to buy {product}",
+                        "Planning {product}"
                     ]
                 },
                 {
                     "name": "ProductDetailIntent",
-                    "slots" : [
+                    "slots": [
                         {
                             "name": "product",
                             "type": "LIST_OF_PRODUCTS",
                             "samples": [
                                 "{product}",
                                 "detail {product}"
-                              ]                      
+                            ]
                         }
                     ],
                     "samples": [
                         "Give me Detail for {product}",
+                        "Give me Detail of {product}",
                         "Give Detail for {product}",
+                        "Give Detail of {product}",
                         "tell me Detail for {product}",
+                        "tell me Details for {product}",
+                        "tell me Detail of {product}",
+                        "tell me Details of {product}",
                         "tell Detail for {product}",
-                        "what's the Detail for {product}",                       
+                        "tell Details for {product}",
+                        "tell Details of {product}",
+                        "tell Detail of {product}",
+                        "what's the Detail for {product}",
                         "Detail for {product}",
                         "jeans detail",
                         "detail",
-                        "size of {product}",
-                        "type of {product}",
                         "features of {product}",
                         "{product} features"
                     ]
                 },
                 {
                     "name": "ProductPriceIntent",
-                    "slots" : [
+                    "slots": [
                         {
                             "name": "product",
                             "type": "LIST_OF_PRODUCTS",
                             "samples": [
                                 "{product}",
                                 "detail {product}"
-                              ]                      
+                            ]
                         }
                     ],
                     "samples": [
@@ -101,7 +109,7 @@
                         "price of {product}",
                         "tell me price for {product}",
                         "tell price for {product}",
-                        "what's the price for {product}",         
+                        "what's the price for {product}",
                         "Let me know price of black {product}",
                         "Let me know price of {product}",
                         "Give me price of black {product}",
@@ -112,21 +120,25 @@
                 },
                 {
                     "name": "OrderDetailIntent",
-                    "samples": [                       
+                    "slots": [],
+                    "samples": [
                         "Give my order detail",
                         "Give my order details",
-                        "what's my order detail", 
+                        "what's my order detail",
                         "tell me order details",
                         "Order details",
                         "Detail my orders",
                         "Give me order details",
                         "Give me order detail",
-                        "I want to deatil of my order"
+                        "what are details of my order",
+                        "what is detail of my order",
+                        "I want to deatil my order"
                     ]
                 },
                 {
                     "name": "ModifyOrderIntent",
-                    "samples": [                       
+                    "slots": [],
+                    "samples": [
                         "I want to change my order",
                         "Change my order",
                         "Change order",
@@ -137,45 +149,154 @@
                 },
                 {
                     "name": "CancelOrderIntent",
+                    "slots": [],
                     "samples": [
                         "I want to cancel my order",
                         "Cancel my order",
                         "Cancel order",
                         "I want order cancelllation"
                     ]
+                },               
+                {
+                    "name": "ModifyOrderDetailIntent",
+                    "slots": [
+                        {
+                            "name": "productattribute",
+                            "type": "PRODUCT_ATTRIBUTES",
+                            "samples": [
+                                "modify {productattribute}",
+                                "change {productattribute}",
+                                "want to change {productattribute}",
+                                "want to modify {productattribute}",
+                                "{productattribute}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "i want to change {productattribute}",
+                        "i want to modify {productattribute}",
+                        "{productattribute}",
+                        "modify {productattribute}",
+                        "change {productattribute}",
+                        "please modify {productattribute}",
+                        "please change {productattribute}"
+                    ]
+                },
+                {
+                    "name": "CustomAddress",
+                    "slots": [
+                        {
+                            "name": "postal_address",
+                            "type": "AMAZON.PostalAddress",
+                            "samples": [
+                                "Postal address is {postal_address}",
+                                "My postal address is {postal_address}",
+                                "{postal_address}"
+                            ]
+                        },
+                        {
+                            "name": "address_city",
+                            "type": "AMAZON.US_CITY",
+                            "samples": [
+                                "my city is {address_city}",
+                                "{address_city}"
+                            ]
+                        },
+                        {
+                            "name": "address_state",
+                            "type": "AMAZON.US_STATE",
+                            "samples": [
+                                "my state is {address_state}",
+                                "{address_state}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "{postal_address} {address_city} {address_state}",
+                        "{postal_address} {address_city}",
+                        "{postal_address} {address_city} {address_state} US",
+                        "{postal_address} {address_city} US",
+                        "{postal_address} {address_city} {address_state} United states",
+                        "{postal_address} {address_city} United states",
+                        "My address is {postal_address} {address_city} {address_state} United states",
+                        "My address is {postal_address} {address_city} United states",
+                        "Address is {postal_address} {address_city} {address_state} United states",
+                        "Address is {postal_address} {address_city} United states"
+                    ]
                 }
             ],
             "types": [
                 {
-                "name": "LIST_OF_PRODUCTS",
-                "values" : [
-                    {
-                        "id": "JEANS",
-                        "name": {
-                            "value": "Purchase Jeans",
-                            "synonyms": [
-                              "Jean",
-                              "Jeans",
-                              "Trouser",
-                              "Trousers"
-                            ]
-                          }
-                    },
-                    {
-                        "id": "SHIRT",
-                        "name": {
-                            "value": "Purchase Shirt",
-                            "synonyms": [
-                              "Shirt",
-                              "T-Shirt"                            
-                            ]
-                          }
-                    }
-                ]
-                
-                }         
+                    "name": "LIST_OF_PRODUCTS",
+                    "values": [
+                        {
+                            "id": "JEANS",
+                            "name": {
+                                "value": "Purchase Jeans",
+                                "synonyms": [
+                                    "Jean",
+                                    "Jeans",
+                                    "Trouser",
+                                    "Trousers"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "SHIRT",
+                            "name": {
+                                "value": "Purchase Shirt",
+                                "synonyms": [
+                                    "Shirt",
+                                    "T-Shirt"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "PRODUCT_ATTRIBUTES",
+                    "values": [
+                        {
+                            "id": "Address",
+                            "name": {
+                                "value": "Address",
+                                "synonyms": [
+                                    "Order Address"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "Quantity",
+                            "name": {
+                                "value": "Quantity",
+                                "synonyms": [
+                                    "Order Quantity"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "Mobileno",
+                            "name": {
+                                "value": "Mobile number",
+                                "synonyms": [
+                                    "Number",
+                                    "Mobile"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "size",
+                            "name": {
+                                "value": "size",
+                                "synonyms": [
+                                    "Order size"
+                                ]
+                            }
+                        }
+                    ]
+                }
             ]
-        }, 
+        },
         "dialog": {
             "intents": [
                 {
@@ -200,6 +321,71 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "ModifyOrderDetailIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "productattribute",
+                            "type": "PRODUCT_ATTRIBUTES",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.183623122550.571044177542"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isInSet",
+                                    "prompt": "Slot.Validation.542627911171.1357667015576.1472347381518",
+                                    "values": [
+                                        "Address",
+                                        "Size",
+                                        "Quantity",
+                                        "Mobile Number",
+                                        "Order Quantity",
+                                        "Number",
+                                        "Order Address",
+                                        "Order Size"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "CustomAddress",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "postal_address",
+                            "type": "AMAZON.PostalAddress",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.996859327723.562646799123"
+                            }
+                        },
+                        {
+                            "name": "address_city",
+                            "type": "AMAZON.US_CITY",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.996859327723.482693354479"
+                            }
+                        },
+                        {
+                            "name": "address_state",
+                            "type": "AMAZON.US_STATE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -220,6 +406,42 @@
                     {
                         "type": "PlainText",
                         "value": "What do you want to purchase?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.183623122550.571044177542",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What do you want to modify from your order ?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.542627911171.1357667015576.1472347381518",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I can't find in your order to modify, please let me know correct value."
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.996859327723.562646799123",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is your postal address?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.996859327723.482693354479",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which city you are located?"
                     }
                 ]
             }
