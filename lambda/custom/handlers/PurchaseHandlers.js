@@ -5,6 +5,8 @@ const BuyIntentHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'BuyIntent';
     },
     handle(handlerInput) {
+        let request = handlerInput.requestEnvelope.request.intent
+        let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
         return handlerInput.responseBuilder.speak('Ok Got Buy Intent')
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
             .getResponse();

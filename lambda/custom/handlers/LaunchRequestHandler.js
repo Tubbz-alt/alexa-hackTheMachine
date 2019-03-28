@@ -6,19 +6,25 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
       let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
       let userName = sessionAttributes.userName
+      let speechText = '';
       if(userName)
       {
-        return handlerInput.responseBuilder.speak('Welcome' + userName + 'To Hack The Machine Team 2')
-        .reprompt('Sorry, I can\'t understand the command. Please say again.')
-        .getResponse();
+        speechText = 'Welcome' + userName + 'To Hack The Machine Team 2';
       }  
       else
       {
-        return handlerInput.responseBuilder.speak('Welcome To Hack The Machine Team 2. May I have your name please')
-        .reprompt('Sorry, I did not get your name please speak again')
-        .getResponse();
+        sessionAttributes = {
+          'userName': '',
+          'orders': [{}]
+        }
+        speechText = 'Welcome To Hack The Machine Team 2. May I have your name please'
       }
+
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+
+      return handlerInput.responseBuilder.speak(speechText)
+      .reprompt('Sorry, I did not get your name please speak again')
+      .getResponse();
       
     },
   };
