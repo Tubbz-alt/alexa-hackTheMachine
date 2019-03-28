@@ -37,7 +37,7 @@
                     "name": "NameRequestIntent",
                     "slots": [
                         {
-                            "name": "user_name",
+                            "name": "username",
                             "type": "AMAZON.US_FIRST_NAME",
                             "samples": [
                                 "My name is {username}",
