@@ -1,4 +1,10 @@
 # alexa-hackTheMachine
+### Description
+This is an Alexa skill that can be used to place and modify orders from SoftWidget as well as get more information on their product. 
+
+### Example Commands
+TODO
+
 ### Global install 
 `npm install -g alexa-skill-test`
 
