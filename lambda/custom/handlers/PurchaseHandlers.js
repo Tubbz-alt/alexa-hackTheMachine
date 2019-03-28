@@ -20,7 +20,11 @@ const ProductDetailIntentHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'ProductDetailIntent';
     },
     handle(handlerInput) {
-        return handlerInput.responseBuilder.speak('Ok Got Prouct Detail Intent')
+        return handlerInput.responseBuilder.speak('The "SWGen2dx" (conveniently the product SKU) is a revolutionary house-hold product created
+                                                  by SoftWidget everyone wants. 
+                                                  It features a sleek casing with intuitive features.
+                                                  Features include: Rock-solid audio engagement ,Silver-bullet touch response system
+                                                  and Long lasting rechargeable battery ')
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
             .getResponse();
     },
