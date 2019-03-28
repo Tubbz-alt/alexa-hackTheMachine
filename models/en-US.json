@@ -37,12 +37,12 @@
                     "name": "NameRequestIntent",
                     "slots": [
                         {
-                            "name": "user_name",
+                            "name": "username",
                             "type": "AMAZON.US_FIRST_NAME",
                             "samples": [
+                                "{username}",
                                 "My name is {username}",
                                 "Name is {username}",
-                                "{username}",
                                 "{username} is my name",
                                 "{username} is me"
                             ]
@@ -54,7 +54,7 @@
                         "{username}",
                         "{username} is my name",
                         "{username} is me"
-                        ]
+                    ]
                 },
                 {
                     "name": "BuyIntent",
@@ -264,6 +264,48 @@
                         "My address is {postal_address} {address_city} United states",
                         "Address is {postal_address} {address_city} {address_state} United states",
                         "Address is {postal_address} {address_city} United states"
+                    ]
+                },
+                {
+                    "name": "CompanyInfoIntent",
+                    "slots": [],
+                    "samples": [
+                        "Tell me more about SoftWidget",
+                        "Tell me about SoftWidget",
+                        "Tell me about SoftWidget Inc",
+                        "Tell me more about SoftWidget Inc",
+                        "What is SoftWidget",
+                        "What is SoftWidget Inc"
+                    ]
+                },
+                {
+                    "name": "CEOInfoIntent",
+                    "slots": [],
+                    "samples": [
+                        "What Does Sally Fields Do",
+                        "Tell me about Sally Fields",
+                        "Who is Sally Fields",
+                        "Sally Fields",
+                        "Tell me about the CEO of SoftWidget Inc",
+                        "Tell me about the CEO of SoftWidget",
+                        "Name the CEO of SoftWidget Inc",
+                        "Name the CEO of SoftWidget",
+                        "Who is the CEO of SoftWidget Inc",
+                        "Who is the CEO of SoftWidget"
+                    ]
+                },
+                {
+                    "name": "CIOCustomIntent",
+                    "slots": [],
+                    "samples": [
+                        "What Does Sean Connery Do",
+                        "Tell me about Sean Connery",
+                        "Who is Sean Connery",
+                        "Sean Connery",
+                        "Name the CIO of SoftWidget",
+                        "Name the CIO of SoftWidget Inc",
+                        "Who is the CIO of SoftWidget",
+                        "Who is the CIO of SoftWidget Inc"
                     ]
                 }
             ],
