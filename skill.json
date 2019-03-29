@@ -3,18 +3,15 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "Test your knowledge of the US states and their capitals.",
+          "summary": "Soft Widget bot",
           "examplePhrases": [
-            "Alexa, open States Quiz",
-            "Alexa, play States Quiz"
+            "Alexa, open Soft Widget"
           ],
           "keywords": [
-            "quiz",
-            "games",
-            "geography"
+            "ecommerce"
           ],
           "name": "soft widget bot",
-          "description": "Test your knowledge of the US states and their capitals.\n\nStates Quiz provides a fun way to keep your U.S. geography skills sharp.\n\nTo start, just say \"Alexa, launch States Quiz\" or \"Alexa, open States Quiz\" to start the game\".\n\nAt anytime, you can stop the game by saying \"Alexa, stop\""
+          "description": "Buy Amazing Latest Products by Soft Widget \"Alexa, stop\""
         }
       },
       "isAvailableWorldwide": true,
