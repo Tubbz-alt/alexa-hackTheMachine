@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "soft widget",
+            "invocationName": "softwidget starter",
             "intents": [
                 {
                     "name": "AMAZON.FallbackIntent",
@@ -32,30 +32,7 @@
                 {
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []
-                },
-                {
-                    "name": "NameRequestIntent",
-                    "slots": [
-                        {
-                            "name": "username",
-                            "type": "AMAZON.US_FIRST_NAME",
-                            "samples": [
-                                "{username}",
-                                "My name is {username}",
-                                "Name is {username}",
-                                "{username} is my name",
-                                "{username} is me"
-                            ]
-                        }
-                    ],
-                    "samples": [
-                        "My name is {username}",
-                        "Name is {username}",
-                        "{username}",
-                        "{username} is my name",
-                        "{username} is me"
-                    ]
-                },
+                },                
                 {
                     "name": "BuyIntent",
                     "slots": [
@@ -159,25 +136,6 @@
                     ]
                 },
                 {
-                    "name": "SpecificOrderDetailIntent",
-                    "slots": [
-                        {
-                            "name": "order_id",
-                            "type": "AMAZON.NUMBER",
-                            "samples": [
-                                "My order id is {order_id}",
-                                "Order id is {order_id}",
-                                "{order_id}"
-                            ]
-                        }
-                    ],
-                    "samples": [
-                        "My order id is {order_id}",
-                        "Order id is {order_id}",
-                        "{order_id}"
-                    ]
-                },
-                {
                     "name": "ModifyOrderIntent",
                     "slots": [],
                     "samples": [
@@ -198,7 +156,7 @@
                         "Cancel order",
                         "I want order cancelllation"
                     ]
-                },
+                },               
                 {
                     "name": "ModifyOrderDetailIntent",
                     "slots": [
@@ -476,23 +434,6 @@
                             "prompts": {}
                         }
                     ]
-                },
-                {
-                    "name": "SpecificOrderDetailIntent",
-                    "delegationStrategy": "ALWAYS",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "order_id",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.854975061173.1174827157201"
-                            }
-                        }
-                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -549,15 +490,6 @@
                     {
                         "type": "PlainText",
                         "value": "Which city you are located?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.854975061173.1174827157201",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "Please give your order Id for Order details"
                     }
                 ]
             }
