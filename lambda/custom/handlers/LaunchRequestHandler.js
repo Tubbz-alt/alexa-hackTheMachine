@@ -35,16 +35,17 @@ const NameRequestHandler = {
       handlerInput.requestEnvelope.request.intent.name === 'NameRequestIntent';
   },
   handle(handlerInput) {
-    var username;
-    if (request.intent.slots.user_name.value && request.intent.slots.user_name.value !== "?") {
-      username = request.intent.slots.user_name.value;
+    var loggedusername;
+    const slots = handlerInput.requestEnvelope.request.intent.slots;
+    if (slots.username.value && slots.username.value !== "?") {
+      loggedusername = slots.username.value;
     }
-    if (username) {
+    if (loggedusername) {
       let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-      sessionAttributes.userName = username;
+      sessionAttributes.userName = loggedusername;
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-      return handlerInput.responseBuilder.speak('Welcome' + username + 'To Hack The Machine Team 2')
-        .reprompt('Welcome' + username + 'To Hack The Machine Team 2')
+      return handlerInput.responseBuilder.speak('Welcome' + loggedusername + 'To Hack The Machine Team 2')
+        .reprompt('Welcome' + loggedusername + 'To Hack The Machine Team 2')
         .getResponse();
     }
     else {
