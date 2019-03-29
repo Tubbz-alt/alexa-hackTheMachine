@@ -1,6 +1,6 @@
 
 const {LaunchRequestHandler, NameRequestHandler} = require('./LaunchRequestHandler')
-const {CancelAndStopIntentHandler, SessionEndedRequestHandler, ErrorHandler} = require('./AmazonIntentHandlers')
+const {HelpHandler, CancelAndStopIntentHandler, SessionEndedRequestHandler, ErrorHandler} = require('./AmazonIntentHandlers')
 const {BuyIntentHandler, 
     ProductDetailIntentHandler,
     ProductPriceIntentHandler,
@@ -10,6 +10,7 @@ const {BuyIntentHandler,
   
 module.exports = {
     LaunchRequestHandler,NameRequestHandler,
+    HelpHandler,
     CancelAndStopIntentHandler, 
     SessionEndedRequestHandler,
     ErrorHandler,

@@ -2,6 +2,8 @@
 
 const Alexa = require('ask-sdk-core');
 const { LaunchRequestHandler,
+    NameRequestHandler,
+    HelpHandler,
     CancelAndStopIntentHandler, 
     SessionEndedRequestHandler,
     ErrorHandler,
@@ -12,15 +14,13 @@ const { LaunchRequestHandler,
     ModifyOrderIntentHandler,
     CancelOrderIntentHandler} = require('./handlers')
 
-if ('undefined' === typeof process.env.DEBUG) {
-    Alexa.appId = '...';
-}
-
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
     .addRequestHandlers(
         LaunchRequestHandler,
+        NameRequestHandler,
+        HelpHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
         BuyIntentHandler,
