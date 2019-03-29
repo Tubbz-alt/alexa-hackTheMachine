@@ -175,6 +175,10 @@
                         }
                     ],
                     "samples": [
+                        "Give me the details for order {orderid}",
+                        "Details for Order ID {orderid}",
+                        "Order Details for Order {orderid}",
+                        "Details for Order {orderid}",
                         "Give my order detail for order id {orderid}",
                         "Give my order details for {orderid}",
                         "what's my order detail for order id {orderid}",
