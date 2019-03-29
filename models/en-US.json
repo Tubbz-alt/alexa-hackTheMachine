@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "softwidget starter",
+            "invocationName": "softwidget bot",
             "intents": [
                 {
                     "name": "AMAZON.FallbackIntent",
@@ -19,7 +19,8 @@
                     "samples": [
                         "I need help",
                         "help",
-                        "Help me"
+                        "Help me",
+                        "Help me what i can do"
                     ]
                 },
                 {
@@ -32,7 +33,30 @@
                 {
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []
-                },                
+                },
+                {
+                    "name": "NameRequestIntent",
+                    "slots": [
+                        {
+                            "name": "username",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "samples": [
+                                "{username}",
+                                "My name is {username}",
+                                "Name is {username}",
+                                "{username} is my name",
+                                "{username} is me"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "My name is {username}",
+                        "Name is {username}",
+                        "{username}",
+                        "{username} is my name",
+                        "{username} is me"
+                    ]
+                },
                 {
                     "name": "BuyIntent",
                     "slots": [
@@ -156,7 +180,7 @@
                         "Cancel order",
                         "I want order cancelllation"
                     ]
-                },               
+                },
                 {
                     "name": "ModifyOrderDetailIntent",
                     "slots": [
@@ -278,24 +302,18 @@
                     "name": "LIST_OF_PRODUCTS",
                     "values": [
                         {
-                            "id": "JEANS",
+                            "id": "SWGproduct",
                             "name": {
-                                "value": "Purchase Jeans",
+                                "value": "SWGen2dx",
                                 "synonyms": [
-                                    "Jean",
-                                    "Jeans",
-                                    "Trouser",
-                                    "Trousers"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "SHIRT",
-                            "name": {
-                                "value": "Purchase Shirt",
-                                "synonyms": [
-                                    "Shirt",
-                                    "T-Shirt"
+                                    "SWGen2dx", 
+                                    "SWGen to dex",
+                                    "SWGen to dx",
+                                    "SWGen too dx",
+                                    "SWGen two dx",
+                                    "S W Gen two d x",
+                                    "S W G e n",
+                                    "S W G e n two d x"
                                 ]
                             }
                         }
@@ -444,7 +462,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "Please tell me Jeans or Shirts."
+                        "value": "We only sell SWGen to dex"
                     }
                 ]
             },
@@ -453,7 +471,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "What do you want to purchase?"
+                        "value": "Do you want to purchase SWGen to dex"
                     }
                 ]
             },
