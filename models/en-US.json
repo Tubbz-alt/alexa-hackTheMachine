@@ -73,7 +73,7 @@
                         "planning to purchase {product}",
                         "I want to purchase {product}",
                         "Purchase {product} for me",
-                        "Puchase {product}",
+                        "Purchase {product}",
                         "{product}",
                         "Purchase",
                         "Puchase {product} of black color",
@@ -163,15 +163,17 @@
                 },
                 {
                     "name": "OrderDetailIntent",
-                    "slots": [{
-                        "name": "orderid",
-                        "type": "AMAZON.NUMBER",
-                        "samples": [
-                            "Order id is  {orderid}",
-                            "{orderid}",
-                            "i want to buy {orderid}"
-                        ]
-                    }],
+                    "slots": [
+                        {
+                            "name": "orderid",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "Order id is  {orderid}",
+                                "{orderid}",
+                                "i want to buy {orderid}"
+                            ]
+                        }
+                    ],
                     "samples": [
                         "Give my order detail for order id {orderid}",
                         "Give my order details for {orderid}",
@@ -198,15 +200,17 @@
                 },
                 {
                     "name": "CancelOrderIntent",
-                    "slots": [{
-                        "name": "orderid",
-                        "type": "AMAZON.NUMBER",
-                        "samples": [
-                            "order id is  {orderid}",
-                            "{orderid}",
-                            "i want to buy {orderid}"
-                        ]
-                    }],
+                    "slots": [
+                        {
+                            "name": "orderid",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "order id is  {orderid}",
+                                "{orderid}",
+                                "i want to buy {orderid}"
+                            ]
+                        }
+                    ],
                     "samples": [
                         "I want to cancel my {orderid}",
                         "Cancel my {orderid}",
