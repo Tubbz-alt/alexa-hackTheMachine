@@ -77,8 +77,8 @@
                         "{product}",
                         "Purchase",
                         "Puchase {product} of black color",
-                        "I'd like to Puchase {product}",
-                        "I'd like to Puchase black {product}",
+                        "I'd like to Purchase {product}",
+                        "I'd like to Purchase black {product}",
                         "Planning to buy {product}",
                         "Planning {product}"
                     ]
@@ -216,6 +216,9 @@
                         }
                     ],
                     "samples": [
+                        "I want to cancel order {orderid}",
+                        "Cancel my order {orderid}",
+                        "Cancel Order {orderid}",
                         "I want to cancel my {orderid}",
                         "Cancel my {orderid}",
                         "Cancel {orderid}",
