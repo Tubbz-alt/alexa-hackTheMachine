@@ -84,6 +84,25 @@
                     ]
                 },
                 {
+                    "name": "QuantityIntent",
+                    "slots": [
+                        {
+                            "name": "quantity",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "quantity is  {quantity}",
+                                "{quantity}",
+                                "i want to buy {quantity}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "quantity is  {quantity}",
+                        "{quantity}",
+                        "i want to buy {quantity}"
+                    ]
+                },
+                {
                     "name": "ProductDetailIntent",
                     "slots": [
                         {
@@ -144,19 +163,25 @@
                 },
                 {
                     "name": "OrderDetailIntent",
-                    "slots": [],
+                    "slots": [{
+                        "name": "orderid",
+                        "type": "AMAZON.NUMBER",
+                        "samples": [
+                            "Order id is  {orderid}",
+                            "{orderid}",
+                            "i want to buy {orderid}"
+                        ]
+                    }],
                     "samples": [
-                        "Give my order detail",
-                        "Give my order details",
-                        "what's my order detail",
-                        "tell me order details",
-                        "Order details",
-                        "Detail my orders",
-                        "Give me order details",
-                        "Give me order detail",
-                        "what are details of my order",
-                        "what is detail of my order",
-                        "I want to detail my order"
+                        "Give my order detail for order id {orderid}",
+                        "Give my order details for {orderid}",
+                        "what's my order detail for order id {orderid}",
+                        "tell me order details for order id {orderid}",
+                        "Order details for order id {orderid}",
+                        "Detail my order for order id {orderid}",
+                        "what are details of my order id {orderid}",
+                        "what is detail of my order id {orderid}",
+                        "I want to detail my order id {orderid}"
                     ]
                 },
                 {
@@ -173,12 +198,20 @@
                 },
                 {
                     "name": "CancelOrderIntent",
-                    "slots": [],
+                    "slots": [{
+                        "name": "orderid",
+                        "type": "AMAZON.NUMBER",
+                        "samples": [
+                            "order id is  {orderid}",
+                            "{orderid}",
+                            "i want to buy {orderid}"
+                        ]
+                    }],
                     "samples": [
-                        "I want to cancel my order",
-                        "Cancel my order",
-                        "Cancel order",
-                        "I want order cancelllation"
+                        "I want to cancel my {orderid}",
+                        "Cancel my {orderid}",
+                        "Cancel {orderid}",
+                        "I want order {orderid}"
                     ]
                 },
                 {
@@ -207,7 +240,7 @@
                     ]
                 },
                 {
-                    "name": "CustomAddress",
+                    "name": "CustomAddressIntent",
                     "slots": [
                         {
                             "name": "postal_address",
@@ -306,7 +339,9 @@
                             "name": {
                                 "value": "SWGen2dx",
                                 "synonyms": [
-                                    "SWGen2dx", 
+                                    "SKU",
+                                    "S K U",
+                                    "SWGen2dx",
                                     "SWGen to dex",
                                     "SWGen to dx",
                                     "SWGen too dx",
@@ -422,9 +457,11 @@
                     ]
                 },
                 {
-                    "name": "CustomAddress",
-                    "confirmationRequired": false,
-                    "prompts": {},
+                    "name": "CustomAddressIntent",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.1108461524693"
+                    },
                     "slots": [
                         {
                             "name": "postal_address",
@@ -508,6 +545,15 @@
                     {
                         "type": "PlainText",
                         "value": "Which city you are located?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.1108461524693",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Your address is {postal_address} {address_city} {address_state}"
                     }
                 ]
             }

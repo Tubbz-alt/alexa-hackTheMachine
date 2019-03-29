@@ -9,7 +9,7 @@ const LaunchRequestHandler = {
     const userID = handlerInput.requestEnvelope.context.System.user.userId;
     let speechText = '';
 
-    let data = dbHelper.getUser(userID).catch((err) => {
+    let data = await dbHelper.getUser(userID).catch((err) => {
       console.log("Error occured while getting user", err);
       speechText = "Facing some technical issues.Please Try again later!"
       return handlerInput.responseBuilder
