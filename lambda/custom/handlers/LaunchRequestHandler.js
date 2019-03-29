@@ -1,31 +1,40 @@
 
+const dbHelper = require('./dbHelper');
+
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-      let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
-      let userName = sessionAttributes.userName
+      const userID = handlerInput.requestEnvelope.context.System.user.userId;
       let speechText = '';
-      if(userName)
-      {
-        speechText = 'Welcome' + userName + 'To Hack The Machine Team 2';
-      }  
-      else
-      {
-        sessionAttributes = {
-          'userName': '',
-          'orders': [{}]
+
+      dbHelper.getUser(userID).then((data) => {
+        if (data) {
+          var username = data.username;//fetch from data
+          speechText = 'Welcome' + userName + 'To Hack The Machine Team 2';
+          let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          sessionAttributes.userName = username;
+          handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+          return responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+        } else {
+          speechText = 'Welcome To Hack The Machine Team 2. May I know your name please'
+          return responseBuilder
+            .speak(speechText)
+            .reprompt('Sorry, I did not get your name please speak again')
+            .getResponse();
         }
-        speechText = 'Welcome To Hack The Machine Team 2. May I have your name please'
-      }
-
-      handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-
-      return handlerInput.responseBuilder.speak(speechText)
-      .reprompt('Sorry, I did not get your name please speak again')
-      .getResponse();
-      
+      })
+        .catch((err) => {
+          console.log("Error occured while getting user", err);
+          speechText = "Facing some technical issues.Please Try again later!"
+          return responseBuilder
+            .speak(speechText)
+            .getResponse();
+        }) 
     },
   };
 
@@ -41,14 +50,25 @@ const NameRequestHandler = {
       loggedusername = slots.username.value;
     }
     if (loggedusername) {
-      let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-      sessionAttributes.userName = loggedusername;
-      handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-      return handlerInput.responseBuilder.speak('Welcome' + loggedusername + 'To Hack The Machine Team 2')
-        .reprompt('Welcome' + loggedusername + 'To Hack The Machine Team 2')
-        .getResponse();
-    }
-    else {
+      const userID = handlerInput.requestEnvelope.context.System.user.userId;
+      dbHelper.addUser(userID, loggedusername).then((data) => {
+
+        let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.userName = loggedusername;
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+        return handlerInput.responseBuilder.speak('Welcome' + loggedusername + 'To Hack The Machine Team 2')
+          .reprompt('Welcome' + loggedusername + 'To Hack The Machine Team 2')
+          .getResponse();
+
+      })
+        .catch((err) => {
+          console.log("Error occured while getting user", err);
+          speechText = "Facing some technical issues.Please Try again later!"
+          return responseBuilder
+            .speak(speechText)
+            .getResponse();
+        })
+    } else {
       return handlerInput.responseBuilder.speak('Sorry, I did not get your name please speak again')
         .reprompt('Sorry, I did not get your name please speak again')
         .getResponse();
