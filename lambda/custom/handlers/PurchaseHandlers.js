@@ -6,10 +6,8 @@ const BuyIntentHandler = {
     },
 
     handle(handlerInput) {
-        var product;
         const slots = handlerInput.requestEnvelope.request.intent.slots;
         if (slots.product.value && slots.product.value !== "?") {
-            product = slots.product.value;
             return handlerInput.responseBuilder.speak(`Let me know quantity of product S K U you want to purchase`)
             .reprompt('Let me know quantity of product S K U you want to purchase')
             .getResponse();
