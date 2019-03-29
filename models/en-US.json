@@ -270,6 +270,10 @@
                     "name": "CompanyInfoIntent",
                     "slots": [],
                     "samples": [
+                        "information about Soft Widget",
+                        "What is Soft Widget Incorporated",
+                        "more info about Soft Widget",
+                        "tell me about the company",
                         "Tell me more about SoftWidget",
                         "Tell me about SoftWidget",
                         "Tell me about SoftWidget Inc",
@@ -282,6 +286,7 @@
                     "name": "CEOInfoIntent",
                     "slots": [],
                     "samples": [
+                        "What is the CEO's name",
                         "What Does Sally Fields Do",
                         "Tell me about Sally Fields",
                         "Who is Sally Fields",
@@ -298,6 +303,7 @@
                     "name": "CIOCustomIntent",
                     "slots": [],
                     "samples": [
+                        "What is the CIO's name",
                         "What Does Sean Connery Do",
                         "Tell me about Sean Connery",
                         "Who is Sean Connery",
