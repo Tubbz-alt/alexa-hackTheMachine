@@ -4,12 +4,26 @@ const BuyIntentHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             handlerInput.requestEnvelope.request.intent.name === 'BuyIntent';
     },
-    handle(handlerInput) {
-        let request = handlerInput.requestEnvelope.request.intent
-        let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
-        return handlerInput.responseBuilder.speak('Ok Got Buy Intent')
-            .reprompt('Sorry, I can\'t understand the command. Please say again.')
-            .getResponse();
+    async handle(handlerInput) {
+        const { responseBuilder } = handlerInput;
+        const userID = handlerInput.requestEnvelope.context.System.user.userId;
+        const slots = handlerInput.requestEnvelope.request.intent.slots;
+        const movieName = slots.MovieName.value;
+        return dbHelper.addMovie(movieName, userID)
+            .then((data) => {
+                const speechText = `You have added product ${movieName}. You can say add to add another one or remove to remove product`;
+                return responseBuilder
+                    .speak(speechText)
+                    .reprompt(GENERAL_REPROMPT)
+                    .getResponse();
+            })
+            .catch((err) => {
+                console.log("Error occured while saving product", err);
+                const speechText = "we cannot save your product right now. Try again!"
+                return responseBuilder
+                    .speak(speechText)
+                    .getResponse();
+            })
     },
 };
 
