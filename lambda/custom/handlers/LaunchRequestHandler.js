@@ -17,8 +17,8 @@ const LaunchRequestHandler = {
         .getResponse();
     });
     if (data.length > 0) {
-      var username = data.Items;//fetch from data
-      speechText = 'Welcome' + userName + 'To Hack The Machine Team 2';
+      var username = data.username;//fetch from data
+      speechText = 'Welcome' + username + 'To Hack The Machine Team 2';
       let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
       sessionAttributes.userName = username;
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes);

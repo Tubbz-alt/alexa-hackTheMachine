@@ -12,7 +12,10 @@ const { LaunchRequestHandler,
     ProductPriceIntentHandler,
     OrderDetailIntentHandler,
     ModifyOrderIntentHandler,
-    CancelOrderIntentHandler} = require('./handlers')
+    CancelOrderIntentHandler,
+    QuantityIntentHandler, 
+    CustomAddressIntentHandler
+    } = require('./handlers')
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
@@ -28,7 +31,9 @@ exports.handler = skillBuilder
         ProductPriceIntentHandler,
         OrderDetailIntentHandler,
         ModifyOrderIntentHandler,
-        CancelOrderIntentHandler
+        CancelOrderIntentHandler,
+        QuantityIntentHandler, 
+        CustomAddressIntentHandler
     )
     .addErrorHandlers(ErrorHandler)
     .lambda();

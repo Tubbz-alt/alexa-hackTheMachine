@@ -146,7 +146,7 @@ const CancelOrderIntentHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             handlerInput.requestEnvelope.request.intent.name === 'CancelOrderIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         var orderID;
         const slots = handlerInput.requestEnvelope.request.intent.slots;
         if (slots.orderid.value && slots.orderid.value !== "?") {
@@ -176,5 +176,6 @@ module.exports = {
     OrderDetailIntentHandler,
     ModifyOrderIntentHandler,
     CancelOrderIntentHandler,
-    QuantityIntentHandler, CustomAddressIntentHandler
+    QuantityIntentHandler, 
+    CustomAddressIntentHandler
 }
