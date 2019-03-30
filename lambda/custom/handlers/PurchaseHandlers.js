@@ -50,32 +50,38 @@ const CustomAddressIntentHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'CustomAddressIntent';
     },
     async handle(handlerInput) {
-        let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        if (sessionAttributes.orderId) {
-            //modify address 
+        if (handlerInput.requestEnvelope.request.intent.confirmationStatus === "CONFIRMED") {
+            let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+            if (sessionAttributes.orderId) {
+                //modify address 
+            } else {
+                const slots = handlerInput.requestEnvelope.request.intent.slots;
+                var completeAddress = slots.postal_address.value + ' ' + slots.address_city.value + ' '  + slots.address_state.value;
+                //sessionAttributes.completeaddress = completeAddress;
+                //handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+                const userID = handlerInput.requestEnvelope.context.System.user.userId;
+                const quantity = sessionAttributes.quantity;
+                const phn = "123456789";
+                const orderID = Math.floor(Date.now() % 1000);
+                return dbHelper.addItemToOrders(orderID, userID, quantity, completeAddress, phn)
+                    .then((data) => {
+                        return handlerInput.responseBuilder.speak(`Congratulations, your order is placed and your order id is ${orderID}`)
+                        .reprompt('You can say help me to know more.')
+                        .getResponse(); 
+                    })
+                    .catch((err) => {
+                        console.log("Error occured while saving order", err);
+                        const speechText = "we cannot save your product right now. Try again!"
+                        return handlerInput.responseBuilder
+                            .speak(speechText)
+                            .getResponse();
+                    })
+            }
         } else {
-            const slots = handlerInput.requestEnvelope.request.intent.slots;
-            var completeAddress = slots.postal_address.value + ' ' + slots.address_city.value + ' '  + slots.address_state.value;
-            sessionAttributes.completeaddress = completeAddress;
-            handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-            const userID = handlerInput.requestEnvelope.context.System.user.userId;
-            const quantity = sessionAttributes.quantity;
-            const phn = "123456789";
-            const orderID = Math.floor(Date.now() % 1000);
-            return dbHelper.addItemToOrders(orderID, userID, quantity, completeAddress, phn)
-                .then((data) => {
-                    return handlerInput.responseBuilder.speak(`Congratulations, your order is placed and your order id is ${orderID}`)
-                    .reprompt('You can say help me to know more.')
-                    .getResponse(); 
-                })
-                .catch((err) => {
-                    console.log("Error occured while saving order", err);
-                    const speechText = "we cannot save your product right now. Try again!"
-                    return handlerInput.responseBuilder
-                        .speak(speechText)
-                        .getResponse();
-                })
-        }
+            return handlerInput.responseBuilder.speak('Please give me your shipping address')
+            .reprompt('I don\'t get your shipping address. Please give me your shipping address')
+            .getResponse();  
+        }     
     },
 };
 
@@ -155,30 +161,36 @@ const CancelOrderIntentHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'CancelOrderIntent';
     },
     async handle(handlerInput) {
-        var orderID;
-        const slots = handlerInput.requestEnvelope.request.intent.slots;
-        if (slots.orderid.value && slots.orderid.value !== "?") {
-            orderID = slots.orderid.value;
-            const userID = handlerInput.requestEnvelope.context.System.user.userId;
-            let data = await dbHelper.removeOrder(orderID, userID).catch((err) => {
-                return handlerInput.responseBuilder
-                    .speak("No such order found.")
-                    .reprompt("You can say help me to know more.")
-                    .getResponse();
-            });
-            if (data && data.Count > 0) {
-                return handlerInput.responseBuilder.speak(`Ok your order with order id ${orderID} is cancelled.`)
-                .reprompt('You can say help me to know more.')
-                .getResponse();
+        if (handlerInput.requestEnvelope.request.intent.confirmationStatus === "CONFIRMED") {
+            var orderID;
+            const slots = handlerInput.requestEnvelope.request.intent.slots;
+            if (slots.orderid.value && slots.orderid.value !== "?") {
+                orderID = slots.orderid.value;
+                const userID = handlerInput.requestEnvelope.context.System.user.userId;
+                let data = await dbHelper.removeOrder(orderID, userID).catch((err) => {
+                    return handlerInput.responseBuilder
+                        .speak("No such order found.")
+                        .reprompt("You can say help me to know more.")
+                        .getResponse();
+                });
+                if (data && data.Count > 0) {
+                    return handlerInput.responseBuilder.speak(`Ok your order with order id ${orderID} is cancelled.`)
+                        .reprompt('You can say help me to know more.')
+                        .getResponse();
+                } else {
+                    return handlerInput.responseBuilder.speak('No such order found.')
+                        .reprompt('You can say help me to know more.')
+                        .getResponse();
+                }
             } else {
-                return handlerInput.responseBuilder.speak('No such order found.')
-                .reprompt('You can say help me to know more.')
-                .getResponse();
-            }          
+                return handlerInput.responseBuilder.speak('No order id specified')
+                    .reprompt('You can say help me to know more.')
+                    .getResponse();
+            }
         } else {
-            return handlerInput.responseBuilder.speak('No order id specified')
-                .reprompt('You can say help me to know more.')
-                .getResponse();
+            return handlerInput.responseBuilder.speak('Request cancelled. You can say help me to know more.')
+            .reprompt('You can say help me to know more.')
+            .getResponse();
         }
     },
 };
