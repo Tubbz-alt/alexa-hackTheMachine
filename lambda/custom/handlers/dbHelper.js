@@ -1,5 +1,5 @@
 var AWS = require("aws-sdk");
-AWS.config.update({region: "us-east-1"});
+AWS.config.update({ region: "us-east-1" });
 const orderTable = "orders";
 const userTable = "user";
 
@@ -11,8 +11,8 @@ dbHelper.prototype.addUser = (userID, username) => {
         const params = {
             TableName: userTable,
             Item: {
-              'userId': userID,
-              'username': username
+                'userId': userID,
+                'username': username
             }
         };
         docClient.put(params, (err, data) => {
@@ -42,10 +42,10 @@ dbHelper.prototype.getUser = (userID) => {
             if (err) {
                 console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
                 return reject(JSON.stringify(err, null, 2))
-            } 
+            }
             console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
             resolve(data.Items)
-            
+
         })
     });
 }
@@ -89,10 +89,10 @@ dbHelper.prototype.getOrders = (userID) => {
             if (err) {
                 console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
                 return reject(JSON.stringify(err, null, 2))
-            } 
+            }
             console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
             resolve(data.Items)
-            
+
         })
     });
 }
@@ -109,7 +109,7 @@ dbHelper.prototype.getOrderByOrderID = (orderID, userID) => {
             if (err) {
                 console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
                 return reject(JSON.stringify(err, null, 2))
-            } 
+            }
             console.log("GetOrder succeeded:", JSON.stringify(data, null, 2));
             resolve(data.Items)
         })
@@ -135,56 +135,57 @@ dbHelper.prototype.removeOrder = (orderID, userID) => {
             resolve(data)
         })
     });
+}
 
-    dbHelper.prototype.modifyAddress = (orderID, address) => {
-        return new Promise((resolve, reject) => {
-            const params = {
-                TableName: orderTable,
-                Key:{
-                    "orderId": Math.floor(orderID)
-                },
-                UpdateExpression: "set orders.address = :add",    
-                ExpressionAttributeValues:{
-                    ":add": address
-                },
-                ReturnValues:"UPDATED_NEW"
+dbHelper.prototype.modifyAddress = (orderID, address) => {
+    return new Promise((resolve, reject) => {
+        const params = {
+            TableName: orderTable,
+            Key: {
+                "orderId": Math.floor(orderID)
+            },
+            UpdateExpression: "set orders.address = :add",
+            ExpressionAttributeValues: {
+                ":add": address
+            },
+            ReturnValues: "UPDATED_NEW"
+        }
+        docClient.update(params, (err, data) => {
+            if (err) {
+                console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+                return reject(JSON.stringify(err, null, 2))
             }
-            docClient.update(params, (err, data) => {
-                if (err) {
-                    console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-                    return reject(JSON.stringify(err, null, 2))
-                } 
-                console.log("Address update succeeded:", JSON.stringify(data, null, 2));
-                resolve(data)
-                
-            })
-        });
-    }
+            console.log("Address update succeeded:", JSON.stringify(data, null, 2));
+            resolve(data)
 
-    dbHelper.prototype.modifyQuantity = (orderID, quantity) => {
-        return new Promise((resolve, reject) => {
-            const params = {
-                TableName: orderTable,
-                Key:{
-                    "orderId": Math.floor(orderID)
-                },
-                UpdateExpression: "set orders.quantity=:q", //'orderId': orderID,    
-                ExpressionAttributeValues:{
-                    ":q": quantity
-                },
-                ReturnValues:"UPDATED_NEW"
+        })
+    });
+}
+
+dbHelper.prototype.modifyQuantity = (orderID, quantity) => {
+    return new Promise((resolve, reject) => {
+        const params = {
+            TableName: orderTable,
+            Key: {
+                "orderId": Math.floor(orderID)
+            },
+            UpdateExpression: "set orders.quantity=:q", //'orderId': orderID,    
+            ExpressionAttributeValues: {
+                ":q": quantity
+            },
+            ReturnValues: "UPDATED_NEW"
+        }
+        docClient.update(params, (err, data) => {
+            if (err) {
+                console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+                return reject(JSON.stringify(err, null, 2))
             }
-            docClient.update(params, (err, data) => {
-                if (err) {
-                    console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-                    return reject(JSON.stringify(err, null, 2))
-                } 
-                console.log("Quantity update succeeded:", JSON.stringify(data, null, 2));
-                resolve(data)
-                
-            })
-        });
-    }
+            console.log("Quantity update succeeded:", JSON.stringify(data, null, 2));
+            resolve(data)
+
+        })
+    });
+
 }
 
 module.exports = new dbHelper();
