@@ -10,7 +10,7 @@
         },
         "interactionModel": {
           "en-US": {
-            "eTag": "587026ee1e46b1027053ad8dedb2400c"
+            "eTag": "dae9c0a7f03845d0fb63c2eed9ebaae8"
           }
         },
         "lambda": [
@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-my-skill-default",
             "handler": "index.handler",
-            "revisionId": "a4299dce-9e61-4818-b392-09c2166d54fa",
+            "revisionId": "1b0bbe58-7ef9-460e-9160-ef8469eef001",
             "runtime": "nodejs8.10"
           }
         ]

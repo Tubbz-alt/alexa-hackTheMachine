@@ -111,7 +111,7 @@ dbHelper.prototype.getOrderByOrderID = (orderID, userID) => {
                 return reject(JSON.stringify(err, null, 2))
             }
             console.log("GetOrder succeeded:", JSON.stringify(data, null, 2));
-            resolve(data.Items)
+            resolve(data.Item)
         })
     });
 }

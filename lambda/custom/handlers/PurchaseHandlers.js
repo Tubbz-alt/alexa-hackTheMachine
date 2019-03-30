@@ -194,7 +194,7 @@ const ModifyOrderIntentHandler = {
         const slots = handlerInput.requestEnvelope.request.intent.slots;
         if(slots.modifyorderid.value && slots.modifyorderid.value !== "?") {
             let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-            sessionAttributes.modifyOrderID = modifyorderid;
+            sessionAttributes.modifyOrderID = slots.modifyorderid.value;
             handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
             return handlerInput.responseBuilder.speak('What do you want to modify, Quantity or Address')
             .reprompt('Sorry, I can\'t understand the command. Please you what you want to modify.')
