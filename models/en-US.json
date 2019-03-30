@@ -213,7 +213,7 @@
                             "type": "AMAZON.NUMBER",
                             "samples": [
                                 "order id is  {modifyorderid}",
-                                "{orderid}",
+                                "{modifyorderid}",
                                 "Modify my order {modifyorderid}",
                                 "Modify order id {modifyorderid}",
                                 "my order id is  {modifyorderid}"
