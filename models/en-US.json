@@ -100,8 +100,12 @@
                     ],
                     "samples": [
                         "{quantity}",
+                        "quantity {quantity}",
                         "quantity is {quantity}",
-                        "i want to buy {quantity}"
+                        "i want to buy {quantity}",
+                        "modify quantity of order {quantity}",
+                        "modify order by quantity {quantity}",
+                        "modify my order by quantity {quantity}"
                     ]
                 },
                 {
@@ -283,6 +287,8 @@
                         }
                     ],
                     "samples": [
+                        "Address {postal_address} {address_city} {address_state}",
+                        "Address {postal_address} {address_city}",
                         "{postal_address} {address_city} {address_state}",
                         "{postal_address} {address_city}",
                         "{postal_address} {address_city} {address_state} US",
@@ -303,7 +309,11 @@
                         "Shipping Address is {postal_address} {address_city} {address_state} US",
                         "Shipping Address is {postal_address} {address_city} {address_state} United states",
                         "Shipping Address is {postal_address} {address_city}",
-                        "Shipping Address is {postal_address} {address_city} {address_state}"
+                        "Shipping Address is {postal_address} {address_city} {address_state}",
+                        "Modify Address to {postal_address} {address_city} {address_state} US",
+                        "Modify Address to {postal_address} {address_city} {address_state} United states",
+                        "Modify Address to {postal_address} {address_city}",
+                        "Modify Address to {postal_address} {address_city} {address_state}"
                     ]
                 },
                 {
