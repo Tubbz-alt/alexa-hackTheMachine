@@ -144,7 +144,7 @@ dbHelper.prototype.modifyAddress = (orderID, address) => {
             Key: {
                 "orderId": Math.floor(orderID)
             },
-            UpdateExpression: "set orders.address = :add",
+            UpdateExpression: "set address = :add",
             ExpressionAttributeValues: {
                 ":add": address
             },
@@ -169,7 +169,7 @@ dbHelper.prototype.modifyQuantity = (orderID, quantity) => {
             Key: {
                 "orderId": Math.floor(orderID)
             },
-            UpdateExpression: "set orders.quantity=:q", //'orderId': orderID,    
+            UpdateExpression: "set qty=:q", //'orderId': orderID,    
             ExpressionAttributeValues: {
                 ":q": quantity
             },
