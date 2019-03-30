@@ -64,6 +64,8 @@
                             "name": "product",
                             "type": "LIST_OF_PRODUCTS",
                             "samples": [
+                                "planning to purchase {product}",
+                                "purchase {product}",
                                 "{product}",
                                 "planning to buy {product}"
                             ]
@@ -322,7 +324,6 @@
                     "name": "CEOInfoIntent",
                     "slots": [],
                     "samples": [
-                        "who is CEO",
                         "What is the CEO's name",
                         "What Does Sally Fields Do",
                         "Tell me about Sally Fields",
@@ -340,7 +341,6 @@
                     "name": "CIOCustomIntent",
                     "slots": [],
                     "samples": [
-                        "who is CIO",
                         "What is the CIO's name",
                         "What Does Sean Connery Do",
                         "Tell me about Sean Connery",
@@ -586,7 +586,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "Do you want to purchase SWGen two dex, also known as S K U"
+                        "value": "What do you want to purchase"
                     }
                 ]
             },
