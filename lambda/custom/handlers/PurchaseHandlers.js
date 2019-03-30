@@ -128,9 +128,9 @@ const OrderDetailIntentHandler = {
                 .reprompt("You can say help me to know more.")
                 .getResponse();
         });
-        if(data && data.length > 0) {
-            return handlerInput.responseBuilder.speak(`Your have placed order for ${data[0].qty} SKU which will be delivered on
-            your shipping address ${data[0].address} with order id ${data[0].orderId}`)
+        if(data) {
+            return handlerInput.responseBuilder.speak(`Your have placed order for ${data.qty} SKU which will be delivered on
+            your shipping address ${data.address} with order id ${data.orderId}`)
             .reprompt('You can say help me to know more.')
                 .getResponse();
         } else {
@@ -173,15 +173,10 @@ const CancelOrderIntentHandler = {
                         .reprompt("You can say help me to know more.")
                         .getResponse();
                 });
-                if (data && data.Count > 0) {
-                    return handlerInput.responseBuilder.speak(`Ok your order with order id ${orderID} is cancelled.`)
-                        .reprompt('You can say help me to know more.')
-                        .getResponse();
-                } else {
-                    return handlerInput.responseBuilder.speak('No such order found.')
-                        .reprompt('You can say help me to know more.')
-                        .getResponse();
-                }
+
+                return handlerInput.responseBuilder.speak(`Ok your order with order id ${orderID} is cancelled.`)
+                    .reprompt('You can say help me to know more.')
+                    .getResponse();
             } else {
                 return handlerInput.responseBuilder.speak('No order id specified')
                     .reprompt('You can say help me to know more.')
