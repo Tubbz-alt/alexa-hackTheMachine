@@ -90,15 +90,15 @@
                             "name": "quantity",
                             "type": "AMAZON.NUMBER",
                             "samples": [
-                                "quantity is  {quantity}",
                                 "{quantity}",
+                                "quantity is {quantity}",
                                 "i want to buy {quantity}"
                             ]
                         }
                     ],
                     "samples": [
-                        "quantity is  {quantity}",
                         "{quantity}",
+                        "quantity is {quantity}",
                         "i want to buy {quantity}"
                     ]
                 },
@@ -129,7 +129,7 @@
                         "tell Detail of {product}",
                         "what's the Detail for {product}",
                         "Detail for {product}",
-                        "jeans detail",
+                        "{product} detail",
                         "detail",
                         "features of {product}",
                         "{product} features"
@@ -148,6 +148,13 @@
                         }
                     ],
                     "samples": [
+                        "tell me price of product",
+                        "give me price for product",
+                        "give me price of product",
+                        "Deal of the day",
+                        "Give me Deal of the day",
+                        "tell me price for product",
+                        "price of product",
                         "price of black {product}",
                         "price of {product}",
                         "tell me price for {product}",
@@ -170,7 +177,8 @@
                             "samples": [
                                 "Order id is  {orderid}",
                                 "{orderid}",
-                                "i want to buy {orderid}"
+                                "i want to buy {orderid}",
+                                "my order id is {orderid}"
                             ]
                         }
                     ],
@@ -179,6 +187,7 @@
                         "Details for Order ID {orderid}",
                         "Order Details for Order {orderid}",
                         "Details for Order {orderid}",
+                        "order detail {orderid}",
                         "Give my order detail for order id {orderid}",
                         "Give my order details for {orderid}",
                         "what's my order detail for order id {orderid}",
@@ -211,7 +220,8 @@
                             "samples": [
                                 "order id is  {orderid}",
                                 "{orderid}",
-                                "i want to buy {orderid}"
+                                "i want to cancel {orderid}",
+                                "my order id is  {orderid}"
                             ]
                         }
                     ],
@@ -348,9 +358,10 @@
                         {
                             "id": "SWGproduct",
                             "name": {
-                                "value": "SWGen2dx",
+                                "value": "SKU",
                                 "synonyms": [
-                                    "SKU",
+                                    "sku",
+                                    "SWGen2dx",
                                     "S K U",
                                     "SWGen2dx",
                                     "SWGen to dex",
@@ -453,14 +464,14 @@
                                     "type": "isInSet",
                                     "prompt": "Slot.Validation.542627911171.1357667015576.1472347381518",
                                     "values": [
-                                        "Address",
-                                        "Size",
-                                        "Quantity",
                                         "Mobile Number",
                                         "Order Quantity",
+                                        "Order Size",
+                                        "Address",
                                         "Number",
-                                        "Order Address",
-                                        "Order Size"
+                                        "Size",
+                                        "Quantity",
+                                        "Order Address"
                                     ]
                                 }
                             ]
@@ -469,6 +480,7 @@
                 },
                 {
                     "name": "CustomAddressIntent",
+                    "delegationStrategy": "ALWAYS",
                     "confirmationRequired": true,
                     "prompts": {
                         "confirmation": "Confirm.Intent.1108461524693"
@@ -500,6 +512,59 @@
                             "prompts": {}
                         }
                     ]
+                },
+                {
+                    "name": "OrderDetailIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "orderid",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1194064266058.120404747491"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CancelOrderIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.212459997577"
+                    },
+                    "slots": [
+                        {
+                            "name": "orderid",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1273061193174.1304559860931"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "QuantityIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "quantity",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.141406612581.825245202605"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -510,7 +575,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "We only sell SWGen to dex"
+                        "value": "We only sell SWGen two dex, also known as S K U"
                     }
                 ]
             },
@@ -519,7 +584,7 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "Do you want to purchase SWGen to dex"
+                        "value": "Do you want to purchase SWGen two dex, also known as S K U"
                     }
                 ]
             },
@@ -565,6 +630,42 @@
                     {
                         "type": "PlainText",
                         "value": "Your address is {postal_address} {address_city} {address_state}"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1194064266058.120404747491",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is your order Id"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1273061193174.1304559860931",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is your order id"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.141406612581.825245202605",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What quantity you want to buy for S K U"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.212459997577",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Are you sure you want to cancel order {orderid}"
                     }
                 ]
             }
