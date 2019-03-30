@@ -17,14 +17,14 @@ const LaunchRequestHandler = {
         .getResponse();
     });
     if (data.length > 0) {
-      var username = data.username;//fetch from data
-      speechText = 'Welcome' + username + 'To Hack The Machine Team 2';
+      var username = data[0].username;//fetch from data
+      speechText = 'Welcome ' + username + ' To Hack The Machine Team 2';
       let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
       sessionAttributes.userName = username;
       handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
       return handlerInput.responseBuilder
         .speak(speechText)
-        .reprompt(speechText)
+        .reprompt('You can say help me to know more.')
         .getResponse();
     } else {
       speechText = 'Welcome To Hack The Machine Team 2. May I know your name please'

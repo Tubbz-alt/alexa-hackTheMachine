@@ -19,7 +19,6 @@ const CancelAndStopIntentHandler = {
         handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput, error) {
-      console.log(`Error handled: ${error.message}`);
       return handlerInput.responseBuilder
         .speak('You Can order softwidget companies products from this skill or you can know more about Soft Widget Comapny and products.')
         .reprompt('Sorry, I can\'t understand the command. Please say again.')

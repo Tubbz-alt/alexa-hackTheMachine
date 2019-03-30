@@ -97,26 +97,23 @@ dbHelper.prototype.getOrders = (userID) => {
     });
 }
 
-dbHelper.prototype.getOrderByOrderID = (orderID) => {
+dbHelper.prototype.getOrderByOrderID = (orderID, userID) => {
     return new Promise((resolve, reject) => {
         const params = {
             TableName: orderTable,
-            KeyConditionExpression: "#orderID = :order_id",
-            ExpressionAttributeNames: {
-                "#orderID": "orderId"
+            Key: {
+                "userId": userID,
+                "orderId": orderID
             },
-            ExpressionAttributeValues: {
-                ":order_id": orderID
-            }
+            ConditionExpression: "attribute_exists(qty)"
         }
         docClient.query(params, (err, data) => {
             if (err) {
                 console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
                 return reject(JSON.stringify(err, null, 2))
             } 
-            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+            console.log("GetOrder succeeded:", JSON.stringify(data, null, 2));
             resolve(data.Items)
-            
         })
     });
 }
@@ -138,7 +135,7 @@ dbHelper.prototype.removeOrder = (orderID, userID) => {
             }
             console.log(JSON.stringify(err));
             console.log("DeleteItem succeeded:", JSON.stringify(data, null, 2));
-            resolve()
+            resolve(data)
         })
     });
 }

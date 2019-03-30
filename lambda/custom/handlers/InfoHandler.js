@@ -43,5 +43,5 @@ const CIOCustomIntentHandler = {
 module.exports = {
     CompanyInfoHandler,
     CEOInfoIntentHandler,
-    CIOCustomIntent
+    CIOCustomIntentHandler
 }

@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-my-skill-default",
             "handler": "index.handler",
-            "revisionId": "bb5dc6f7-95c2-4ebb-bd48-26eafc572d96",
+            "revisionId": "bbd71bfb-4cc6-421d-9127-f680c0d7d382",
             "runtime": "nodejs8.10"
           }
         ]

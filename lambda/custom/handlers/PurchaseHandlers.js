@@ -1,3 +1,5 @@
+const dbHelper = require('./dbHelper');
+
 const BuyIntentHandler = {
 
     canHandle(handlerInput) {
@@ -16,7 +18,6 @@ const BuyIntentHandler = {
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
             .getResponse();
         }
-
     },
 };
 
@@ -34,7 +35,7 @@ const QuantityIntentHandler = {
             //new order
             const slots = handlerInput.requestEnvelope.request.intent.slots;
             sessionAttributes.quantity = slots.quantity.value;
-            handlerInput.attributesManager.sessionAttributes(sessionAttributes); 
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes); 
             return handlerInput.responseBuilder.speak('Please give me your shipping address')
             .reprompt('I don\'t get your shipping address. Please give me your shipping address')
             .getResponse(); 
@@ -54,9 +55,9 @@ const CustomAddressIntentHandler = {
             //modify address 
         } else {
             const slots = handlerInput.requestEnvelope.request.intent.slots;
-            var completeAddress = slots.postal_address.value + slots.address_city.value + slots.address_state.value;
+            var completeAddress = slots.postal_address.value + ' ' + slots.address_city.value + ' '  + slots.address_state.value;
             sessionAttributes.completeaddress = completeAddress;
-            handlerInput.attributesManager.sessionAttributes(sessionAttributes);
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
             const userID = handlerInput.requestEnvelope.context.System.user.userId;
             const quantity = sessionAttributes.quantity;
             const phn = "123456789";
@@ -113,17 +114,24 @@ const OrderDetailIntentHandler = {
 
     async handle(handlerInput) {
         const slots = handlerInput.requestEnvelope.request.intent.slots;
-        const orderId = slots.orderid.value
-        let data = await dbHelper.getOrderByOrderID(orderId).catch((err) => {
+        const orderId = slots.orderid.value;
+        const userID = handlerInput.requestEnvelope.context.System.user.userId;
+        let data = await dbHelper.getOrderByOrderID(orderId, userID).catch((err) => {
             return handlerInput.responseBuilder
                 .speak("No such order found.")
                 .reprompt("You can say help me to know more.")
                 .getResponse();
         });
-        return handlerInput.responseBuilder.speak(`Your have placed order for ${data.qty} SKU which will be delivered on
-        your shipping address ${data.address} with order id ${data.qty}`)
-        .reprompt('You can say help me to know more.')
-            .getResponse();
+        if(data && data.length > 0) {
+            return handlerInput.responseBuilder.speak(`Your have placed order for ${data[0].qty} SKU which will be delivered on
+            your shipping address ${data[0].address} with order id ${data[0].orderId}`)
+            .reprompt('You can say help me to know more.')
+                .getResponse();
+        } else {
+            return handlerInput.responseBuilder.speak("No such order found.")
+                .reprompt("You can say help me to know more.")
+                .getResponse();
+        }   
     },
 };
 
@@ -152,15 +160,21 @@ const CancelOrderIntentHandler = {
         if (slots.orderid.value && slots.orderid.value !== "?") {
             orderID = slots.orderid.value;
             const userID = handlerInput.requestEnvelope.context.System.user.userId;
-            await dbHelper.removeOrder(orderID, userID).catch((err) => {
+            let data = await dbHelper.removeOrder(orderID, userID).catch((err) => {
                 return handlerInput.responseBuilder
                     .speak("No such order found.")
                     .reprompt("You can say help me to know more.")
                     .getResponse();
             });
-            return handlerInput.responseBuilder.speak(`Ok ${orderID} is cancelled.`)
+            if (data && data.Count > 0) {
+                return handlerInput.responseBuilder.speak(`Ok your order with order id ${orderID} is cancelled.`)
                 .reprompt('You can say help me to know more.')
                 .getResponse();
+            } else {
+                return handlerInput.responseBuilder.speak('No such order found.')
+                .reprompt('You can say help me to know more.')
+                .getResponse();
+            }          
         } else {
             return handlerInput.responseBuilder.speak('No order id specified')
                 .reprompt('You can say help me to know more.')

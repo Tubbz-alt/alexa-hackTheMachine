@@ -9,6 +9,11 @@ const { BuyIntentHandler,
     CancelOrderIntentHandler,
     QuantityIntentHandler, 
     CustomAddressIntentHandler} = require('./PurchaseHandlers')
+const {
+    CompanyInfoHandler,
+    CEOInfoIntentHandler,
+    CIOCustomIntentHandler
+    } = require('./InfoHandler')
   
 module.exports = {
     LaunchRequestHandler,NameRequestHandler,
@@ -23,5 +28,8 @@ module.exports = {
     ModifyOrderIntentHandler,
     CancelOrderIntentHandler,
     QuantityIntentHandler, 
-    CustomAddressIntentHandler
+    CustomAddressIntentHandler,
+    CompanyInfoHandler,
+    CEOInfoIntentHandler,
+    CIOCustomIntentHandler
 }
