@@ -99,7 +99,7 @@ const ProductPriceIntentHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'ProductPriceIntent';
     },
     handle(handlerInput) {
-        return handlerInput.responseBuilder.speak('Ok Got Product Price Intent')
+        return handlerInput.responseBuilder.speak('Price of product S K U is $1000')
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
             .getResponse();
     },

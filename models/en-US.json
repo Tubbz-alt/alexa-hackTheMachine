@@ -322,6 +322,7 @@
                     "name": "CEOInfoIntent",
                     "slots": [],
                     "samples": [
+                        "who is CEO",
                         "What is the CEO's name",
                         "What Does Sally Fields Do",
                         "Tell me about Sally Fields",
@@ -339,6 +340,7 @@
                     "name": "CIOCustomIntent",
                     "slots": [],
                     "samples": [
+                        "who is CIO",
                         "What is the CIO's name",
                         "What Does Sean Connery Do",
                         "Tell me about Sean Connery",

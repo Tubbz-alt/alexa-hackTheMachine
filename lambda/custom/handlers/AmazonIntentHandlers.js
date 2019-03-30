@@ -20,7 +20,7 @@ const CancelAndStopIntentHandler = {
     },
     handle(handlerInput, error) {
       return handlerInput.responseBuilder
-        .speak('You Can order softwidget companies products from this skill or you can know more about Soft Widget Comapny and products.')
+        .speak('You Can order softwidget companies products from this skill or you can know more about Soft Widget Company and products.')
         .reprompt('Sorry, I can\'t understand the command. Please say again.')
         .getResponse();
     },
