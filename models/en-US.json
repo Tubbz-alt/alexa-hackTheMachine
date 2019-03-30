@@ -312,7 +312,7 @@
                         "Shipping Address is {postal_address} {address_city} {address_state} US",
                         "Shipping Address is {postal_address} {address_city} {address_state} United states",
                         "Shipping Address is {postal_address} {address_city}",
-                        "Shipping Address is {postal_address} {address_city} {address_state}",
+                        "Shipping Address is {postal_address} {address_city} {address_state}"
                     ]
                 },
                 {

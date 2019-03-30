@@ -102,12 +102,10 @@ dbHelper.prototype.getOrderByOrderID = (orderID, userID) => {
         const params = {
             TableName: orderTable,
             Key: {
-                "userId": userID,
-                "orderId": orderID
-            },
-            ConditionExpression: "attribute_exists(qty)"
+                "orderId": Math.floor(orderID)
+            }
         }
-        docClient.query(params, (err, data) => {
+        docClient.get(params, (err, data) => {
             if (err) {
                 console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
                 return reject(JSON.stringify(err, null, 2))
@@ -123,10 +121,9 @@ dbHelper.prototype.removeOrder = (orderID, userID) => {
         const params = {
             TableName: orderTable,
             Key: {
-                "userId": userID,
-                "orderId": orderID
+                "orderId": Math.floor(orderID)
             },
-            ConditionExpression: "attribute_exists(qty)"
+            ConditionExpression: "attribute_exists(userId)"
         }
         docClient.delete(params, function (err, data) {
             if (err) {
