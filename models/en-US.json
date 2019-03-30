@@ -313,7 +313,11 @@
                         "Modify Address to {postal_address} {address_city} {address_state} US",
                         "Modify Address to {postal_address} {address_city} {address_state} United states",
                         "Modify Address to {postal_address} {address_city}",
-                        "Modify Address to {postal_address} {address_city} {address_state}"
+                        "Modify Address to {postal_address} {address_city} {address_state}",
+                        "New Address is {postal_address} {address_city} {address_state}",
+                        "New Address is {postal_address} {address_city}",
+                        "New Address is {postal_address} {address_city} US",
+                        "New Address is {postal_address} {address_city} United states"
                     ]
                 },
                 {
@@ -336,6 +340,7 @@
                     "name": "CEOInfoIntent",
                     "slots": [],
                     "samples": [
+                        "who is CEO",
                         "What is the CEO's name",
                         "What Does Sally Fields Do",
                         "Tell me about Sally Fields",
@@ -353,6 +358,7 @@
                     "name": "CIOCustomIntent",
                     "slots": [],
                     "samples": [
+                        "who is CIO",
                         "What is the CIO's name",
                         "What Does Sean Connery Do",
                         "Tell me about Sean Connery",
