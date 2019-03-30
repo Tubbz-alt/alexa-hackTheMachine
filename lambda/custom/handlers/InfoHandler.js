@@ -5,8 +5,6 @@ const CompanyInfoHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'CompanyInfoIntent';
     },
     handle(handlerInput) {
-        let request = handlerInput.requestEnvelope.request.intent
-        let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
         return handlerInput.responseBuilder.speak('Ok SoftWidget Inc is a consumer product company established in 2017. The company has rapidly grow with over 23000 employees.The company has a reported 50 million in revenue with a technology spend of 20 million')
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
             .getResponse();
