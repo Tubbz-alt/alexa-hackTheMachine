@@ -207,14 +207,26 @@
                 },
                 {
                     "name": "ModifyOrderIntent",
-                    "slots": [],
+                    "slots": [
+                        {
+                            "name": "modifyorderid",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "order id is  {modifyorderid}",
+                                "{orderid}",
+                                "Modify my order {modifyorderid}",
+                                "Modify order id {modifyorderid}",
+                                "my order id is  {modifyorderid}"
+                            ]
+                        }
+                    ],
                     "samples": [
-                        "I want to change my order",
-                        "Change my order",
-                        "Change order",
-                        "Modify my order",
-                        "Modify order",
-                        "I want to modify my order"
+                        "I want to change my order {modifyorderid}",
+                        "Change my order {modifyorderid}",
+                        "Change order {modifyorderid}",
+                        "Modify my order {modifyorderid}",
+                        "Modify order {modifyorderid}",
+                        "I want to modify my order {modifyorderid}"
                     ]
                 },
                 {
@@ -239,31 +251,6 @@
                         "Cancel my {orderid}",
                         "Cancel {orderid}",
                         "I want order {orderid}"
-                    ]
-                },
-                {
-                    "name": "ModifyOrderDetailIntent",
-                    "slots": [
-                        {
-                            "name": "productattribute",
-                            "type": "PRODUCT_ATTRIBUTES",
-                            "samples": [
-                                "modify {productattribute}",
-                                "change {productattribute}",
-                                "want to change {productattribute}",
-                                "want to modify {productattribute}",
-                                "{productattribute}"
-                            ]
-                        }
-                    ],
-                    "samples": [
-                        "i want to change {productattribute}",
-                        "i want to modify {productattribute}",
-                        "{productattribute}",
-                        "modify {productattribute}",
-                        "change {productattribute}",
-                        "please modify {productattribute}",
-                        "please change {productattribute}"
                     ]
                 },
                 {
@@ -413,25 +400,6 @@
                                     "Order Quantity"
                                 ]
                             }
-                        },
-                        {
-                            "id": "Mobileno",
-                            "name": {
-                                "value": "Mobile number",
-                                "synonyms": [
-                                    "Number",
-                                    "Mobile"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "size",
-                            "name": {
-                                "value": "size",
-                                "synonyms": [
-                                    "Order size"
-                                ]
-                            }
                         }
                     ]
                 }
@@ -457,39 +425,6 @@
                                 {
                                     "type": "hasEntityResolutionMatch",
                                     "prompt": "Slot.Validation.124647280749.1544315380405.495607136685"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "name": "ModifyOrderDetailIntent",
-                    "delegationStrategy": "ALWAYS",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "productattribute",
-                            "type": "PRODUCT_ATTRIBUTES",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.183623122550.571044177542"
-                            },
-                            "validations": [
-                                {
-                                    "type": "isInSet",
-                                    "prompt": "Slot.Validation.542627911171.1357667015576.1472347381518",
-                                    "values": [
-                                        "Mobile Number",
-                                        "Order Quantity",
-                                        "Order Size",
-                                        "Address",
-                                        "Number",
-                                        "Size",
-                                        "Quantity",
-                                        "Order Address"
-                                    ]
                                 }
                             ]
                         }
@@ -579,6 +514,23 @@
                             "elicitationRequired": true,
                             "prompts": {
                                 "elicitation": "Elicit.Slot.141406612581.825245202605"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ModifyOrderIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "modifyorderid",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1441372476086.1045964243158"
                             }
                         }
                     ]
@@ -683,6 +635,15 @@
                     {
                         "type": "PlainText",
                         "value": "Are you sure you want to cancel order {orderid}"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1441372476086.1045964243158",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Please tell order id of order you want to modify"
                     }
                 ]
             }

@@ -135,6 +135,56 @@ dbHelper.prototype.removeOrder = (orderID, userID) => {
             resolve(data)
         })
     });
+
+    dbHelper.prototype.modifyAddress = (orderID, address) => {
+        return new Promise((resolve, reject) => {
+            const params = {
+                TableName: orderTable,
+                Key:{
+                    "orderId": Math.floor(orderID)
+                },
+                UpdateExpression: "set orders.address = :add",    
+                ExpressionAttributeValues:{
+                    ":add": address
+                },
+                ReturnValues:"UPDATED_NEW"
+            }
+            docClient.update(params, (err, data) => {
+                if (err) {
+                    console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+                    return reject(JSON.stringify(err, null, 2))
+                } 
+                console.log("Address update succeeded:", JSON.stringify(data, null, 2));
+                resolve(data)
+                
+            })
+        });
+    }
+
+    dbHelper.prototype.modifyQuantity = (orderID, quantity) => {
+        return new Promise((resolve, reject) => {
+            const params = {
+                TableName: orderTable,
+                Key:{
+                    "orderId": Math.floor(orderID)
+                },
+                UpdateExpression: "set orders.quantity=:q", //'orderId': orderID,    
+                ExpressionAttributeValues:{
+                    ":q": quantity
+                },
+                ReturnValues:"UPDATED_NEW"
+            }
+            docClient.update(params, (err, data) => {
+                if (err) {
+                    console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+                    return reject(JSON.stringify(err, null, 2))
+                } 
+                console.log("Quantity update succeeded:", JSON.stringify(data, null, 2));
+                resolve(data)
+                
+            })
+        });
+    }
 }
 
 module.exports = new dbHelper();

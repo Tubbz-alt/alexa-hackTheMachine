@@ -9,6 +9,9 @@ const BuyIntentHandler = {
 
     handle(handlerInput) {
         const slots = handlerInput.requestEnvelope.request.intent.slots;
+        let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.modifyOrderID = null;
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
         if (slots.product.value && slots.product.value !== "?") {
             return handlerInput.responseBuilder.speak(`Let me know quantity of product S K U, you want to purchase`)
             .reprompt('Let me know quantity of product S K U you want to purchase')
@@ -27,10 +30,30 @@ const QuantityIntentHandler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             handlerInput.requestEnvelope.request.intent.name === 'QuantityIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        if(sessionAttributes.orderId) {
+        if(sessionAttributes.modifyOrderID) {
             //modify case
+            const slots = handlerInput.requestEnvelope.request.intent.slots;
+            let data = await dbHelper.modifyQuantity(sessionAttributes.modifyOrderID, slots.quantity.value).catch((err) => {
+                return handlerInput.responseBuilder
+                    .speak("Unable to update quantity, No such order found.")
+                    .reprompt("You can say help me to know more.")
+                    .getResponse();
+            });
+            sessionAttributes.modifyOrderID = null;
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+            if (data) {
+                return handlerInput.responseBuilder
+                    .speak("Order Updated Successfully")
+                    .reprompt("You can say help me to know more.")
+                    .getResponse();
+            } else {
+                return handlerInput.responseBuilder
+                .speak("Unable to update quantity, No such order found.")
+                .reprompt("You can say help me to know more.")
+                .getResponse();
+            }
         } else {
             //new order
             const slots = handlerInput.requestEnvelope.request.intent.slots;
@@ -51,12 +74,32 @@ const CustomAddressIntentHandler = {
     },
     async handle(handlerInput) {
         if (handlerInput.requestEnvelope.request.intent.confirmationStatus === "CONFIRMED") {
+            const slots = handlerInput.requestEnvelope.request.intent.slots;
+            var completeAddress = slots.postal_address.value + ' ' + slots.address_city.value + ' '  + slots.address_state.value;
             let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-            if (sessionAttributes.orderId) {
-                //modify address 
-            } else {
+            if(sessionAttributes.modifyOrderID) {
+                //modify case
                 const slots = handlerInput.requestEnvelope.request.intent.slots;
-                var completeAddress = slots.postal_address.value + ' ' + slots.address_city.value + ' '  + slots.address_state.value;
+                let data = await dbHelper.modifyAddress(sessionAttributes.modifyOrderID, completeAddress).catch((err) => {
+                    return handlerInput.responseBuilder
+                        .speak("Unable to update address, No such order found.")
+                        .reprompt("You can say help me to know more.")
+                        .getResponse();
+                });
+                sessionAttributes.modifyOrderID = null;
+                handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+                if (data) {
+                    return handlerInput.responseBuilder
+                        .speak("Order Updated Successfully")
+                        .reprompt("You can say help me to know more.")
+                        .getResponse();
+                } else {
+                    return handlerInput.responseBuilder
+                    .speak("Unable to update address, No such order found.")
+                    .reprompt("You can say help me to know more.")
+                    .getResponse();
+                }
+            } else {
                 //sessionAttributes.completeaddress = completeAddress;
                 //handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
                 const userID = handlerInput.requestEnvelope.context.System.user.userId;
@@ -148,7 +191,16 @@ const ModifyOrderIntentHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'ModifyOrderIntent';
     },
     async handle(handlerInput) {
-        return handlerInput.responseBuilder.speak('Ok Got Modify Order Intent')
+        const slots = handlerInput.requestEnvelope.request.intent.slots;
+        if(slots.modifyorderid.value && slots.modifyorderid.value !== "?") {
+            let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+            sessionAttributes.modifyOrderID = modifyorderid;
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+            return handlerInput.responseBuilder.speak('What do you want to modify, Quantity or Address')
+            .reprompt('Sorry, I can\'t understand the command. Please you what you want to modify.')
+            .getResponse();
+        }
+        return handlerInput.responseBuilder.speak("Please give order id you want to modify")
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
             .getResponse();
     },
